@@ -1,0 +1,29 @@
+function c=diverging_colors_2(ind, total_nbr)
+
+if nargin<2
+    total_nbr=9;
+end
+
+Palette =[ [118 42 131];...
+            [153 112 171];...
+            [194 165 207];...
+            [231 212 232];...
+            [222 230 231];...
+            [217 240 211];...
+            [172 211 157];...
+            [90 174 97];...
+            [27 120 55];...
+    ]./256;
+
+if total_nbr<10
+    selection=round(linspace(1,9,total_nbr));
+    
+    c=Palette(selection(ind),:);
+else
+
+    xcolors=linspace(1,total_nbr,9);
+    c=[interp1(xcolors,Palette(:,1),ind) interp1(xcolors,Palette(:,2),ind) interp1(xcolors,Palette(:,3),ind)];
+end
+
+
+end
