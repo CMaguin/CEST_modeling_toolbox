@@ -313,10 +313,30 @@ switch metabolite_name
         P=add_constrained_relation(P,strcat('P.T2(',num2str(1+P.n_cest_pools),')=P.T2_Glu;'));
         P=add_constrained_relation(P,strcat('P.kex(',num2str(1+P.n_cest_pools),')=P.kex_Glu;'));
 
-        P.n_cest_pools=P.n_cest_pools+1;    
+        P.n_cest_pools=P.n_cest_pools+1; 
+
+    case 'glutamate_2_ves' %a secondary glutamate pool to model vesicular glutamate
+        if ~isfield(P,'Gluves'); P.Gluves=3; end    %if not given, init [Glu] at 3mM      
+        if ~isfield(P,'kex_Gluves'); P.kex_Gluves=1000; end
+        if ~isfield(P,'T2_Gluves'); P.T2_Gluves=1; end
+        
+        P.pool_names{1+P.n_cest_pools}='Gluves';
+        P.H=[P.H                3*P.Gluves];    
+        P.kex=[P.kex            1000];      %Hz   
+        P.dw=[P.dw              3.0];         %ppm
+        P.T1=[P.T1  P.T1_water  ]; 
+        P.T2=[P.T2  0.001      ] ; 
+        
+        P=add_constrained_relation(P,strcat('P.H(',num2str(1+P.n_cest_pools),')=3*P.Gluves;'));
+        P=add_constrained_relation(P,strcat('P.T2(',num2str(1+P.n_cest_pools),')=P.T2_Gluves;'));
+        P=add_constrained_relation(P,strcat('P.kex(',num2str(1+P.n_cest_pools),')=P.kex_Gluves;'));
+        
+        P.n_cest_pools=P.n_cest_pools+1;   
 
    case 'glutamate_physio_2' %as given in Wermter 2015
         if ~isfield(P,'Glu2'); P.Glu2=10; end    %if not given, init [Glu] at 10mM      
+        if ~isfield(P,'kex_Glu2'); P.kex_Glu=7738; end
+        if ~isfield(P,'T2_Glu2'); P.T2_Glu2=10; end
         
         P.pool_names{1+P.n_cest_pools}='Glu2';
         P.H=[P.H                3*P.Glu2];    
@@ -326,6 +346,8 @@ switch metabolite_name
         P.T2=[P.T2  0.015       ] ; 
         
         P=add_constrained_relation(P,strcat('P.H(',num2str(1+P.n_cest_pools),')=3*P.Glu2;'));
+        P=add_constrained_relation(P,strcat('P.T2(',num2str(1+P.n_cest_pools),')=P.T2_Glu2;'));
+        P=add_constrained_relation(P,strcat('P.kex(',num2str(1+P.n_cest_pools),')=P.kex_Glu2;'));
         
         P.n_cest_pools=P.n_cest_pools+1;   
         
