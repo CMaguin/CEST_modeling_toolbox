@@ -44,6 +44,7 @@ Here is a non-exhaustive list :
 ### Example 3 : Fitting toolbox
 
 With the script "Fitting_exchange_rate_GluCEST_ToyDataSet.m", I propose a fitting function to estimate exchange rate values from multi-B<sub>1</sub> experimental CEST data (namely the glutamate toy data set). You can look at how the buffer affects the exchange rate value. You can also expect that the actual exchange rate value would be vastely different in vivo than from in vitro. 
- ![Fitting multiB1 data](/Examples/illustrating-figures/Fig5.png)
+
+![Glutamate phantoms at 37C in different buffers](/Examples/illustrating-figures/Fig4.png)  ![Fitting multiB1 data](/Examples/illustrating-figures/Fig5.png)
 
 
