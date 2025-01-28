@@ -2,7 +2,7 @@ clear all
 clc
 close all
 
-addpath(genpath(pwd))
+%addpath(genpath(pwd))
 %% load data
 ToyDataSetpath=fullfile(pwd, 'ToyDataSet');
 
@@ -286,7 +286,15 @@ for selected_tubes=selected_exp
     iB1=1;
     for ZNum=selected_B1
         plot(xZspec,Z(iB1,:),'Color',diverging_colors_2(ZNum,10),'LineStyle','none','Marker','+','MarkerSize',10); hold on    
-        plot(Fit.densex,squeeze(Fit.fitdense(:,iB1,:)),'Color',diverging_colors_2(ZNum,10),'LineStyle','-','Marker','none','LineWidth',1.5); hold on
+        Tx(iB1)=plot(Fit.densex,squeeze(Fit.fitdense(:,iB1,:)),'Color',diverging_colors_2(ZNum,10),'LineStyle','-','Marker','none','LineWidth',1.5); hold on
+        lab{iB1}=strcat(num)
         iB1=iB1+1;
+        
     end
+    legend(Tx,)
+    set(gca,'XDir','reverse')
+    set(gcf,'Color','w')
+    xlabel('\delta (ppm)')
+    ylabel 'Z'
+    title(strcat('Fit of multi-B_1 CEST data of a 100 mM Glu phantom in  ',Buffer{i}))
 end
